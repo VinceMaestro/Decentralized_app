@@ -5,59 +5,15 @@ web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"},{"name":"account","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"bytes32"}],"name":"registeredAccount","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
 
-
-
-// [ { constant: true,
-//     inputs: [ [Object] ],
-//     name: 'totalVotesFor',
-//     outputs: [ [Object] ],
-//     payable: false,
-//     stateMutability: 'view',
-//     type: 'function' },
-//   { constant: true,
-//     inputs: [ [Object] ],
-//     name: 'votesReceived',
-//     outputs: [ [Object] ],
-//     payable: false,
-//     stateMutability: 'view',
-//     type: 'function' },
-//   { constant: false,
-//     inputs: [ [Object], [Object] ],
-//     name: 'voteForCandidate',
-//     outputs: [],
-//     payable: false,
-//     stateMutability: 'nonpayable',
-//     type: 'function' },
-//   { constant: true,
-//     inputs: [ [Object] ],
-//     name: 'registeredAccount',
-//     outputs: [ [Object] ],
-//     payable: false,
-//     stateMutability: 'view',
-//     type: 'function' },
-//   { constant: true,
-//     inputs: [ [Object] ],
-//     name: 'candidateList',
-//     outputs: [ [Object] ],
-//     payable: false,
-//     stateMutability: 'view',
-//     type: 'function' },
-//   { inputs: [ [Object] ],
-//     payable: false,
-//     stateMutability: 'nonpayable',
-//     type: 'constructor' } ]
-
-
-
 VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute contractInstance.address to get the address at which the contract is deployed and change the line below to use your deployed address
-contractInstance = VotingContract.at('0xe44ce2a7b9ff4b4629d049102da493a3950b74b2');
+contractInstance = VotingContract.at('0xa57be1ecd2446b1287851b8f852325adbe214051');
 candidates = {"Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3"}
 
 function voteForCandidate() {
   blockchainAccount = $("#bcAccount").val();
   candidateName = $("#candidate").val();
-  contractInstance.voteForCandidate(candidateName, blockchainAccount, {from: web3.eth.accounts[0]}, function() {
+  contractInstance.voteForCandidate(candidateName, blockchainAccount, {from: blockchainAccount}, function() {
     let div_id = candidates[candidateName];
     $("#" + div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
   });
