@@ -6,6 +6,8 @@ Thanks to [Siraj Raval](https://www.youtube.com/watch?v=gSQXq2_j-mw&t=456s) & [M
 ### Requirements
 [node](https://nodejs.org/en/download/package-manager/)
 
+Use Managed Software Center on school's mac (NodeJS LTS)
+
 ### Install packages
 <!-- npm install package.json -->
 npm install ethereumjs-testrpc web3@0.20.1
@@ -13,7 +15,12 @@ npm install solc
 
 (More about dependencies [here](https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json))
 
-### Launch node
+(For atom users, install package: "language-etherium" to support solidity syntax)
+
+## Launch testrpc (environnement simulating etherium blockchain) - Terminal 1:
+./node_modules/.bin/testrpc
+
+### Launch node - Terminal 2:
 node
 
 ### Here we go:
